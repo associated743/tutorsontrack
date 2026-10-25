@@ -65,9 +65,11 @@
 
   /* hero */
   .hero{padding:64px 0 48px;position:relative;overflow:hidden}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
-  @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
-  .hero .lead{font-size:1.2rem;color:var(--ink-soft);max-width:46ch}
+  .hero .hero-text{max-width:760px;margin:0 auto 44px;text-align:center}
+  .hero .hero-text p{margin-left:auto;margin-right:auto}
+  .hero .lead{font-size:1.2rem;color:var(--ink-soft);max-width:52ch}
+  .hero .actions{justify-content:center}
+  .hero .tv{max-width:960px;margin:0 auto}
   .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
   .hero .fine{font-size:.95rem;color:var(--ink-soft);margin-top:18px}
 
@@ -135,12 +137,15 @@
     box-shadow:5px 5px 0 var(--line);
   }
   .tutor .ava{
-    width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;
+    width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;
     font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.4rem;border:3px solid var(--ink);
   }
-  .tutor h3{margin-bottom:2px}
-  .tutor .meta{color:var(--ink-soft);font-size:.95rem;margin-bottom:10px}
+  .tutor h3{margin-bottom:6px}
+  .tutor .ava.photo{padding:0;overflow:hidden;background:#fff}
+  .tutor .ava.photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .tutor .ava.chef svg{width:66px;height:66px}
   .tutor p{font-size:1rem;margin:0;font-family:"Fredoka",sans-serif;font-weight:600;color:var(--blue)}
+  .tutor.join p{font-family:"Nunito",sans-serif;font-weight:400;color:var(--ink-soft)}
   .tutor.join{background:var(--blue-pale);border-style:dashed;display:flex;flex-direction:column;justify-content:center;text-align:center}
   .tutor.join .btn{align-self:center;margin-top:12px}
 
@@ -203,7 +208,7 @@
 
 <section class="hero">
   <div class="wrap">
-    <div>
+    <div class="hero-text">
       <h1>Free tutoring for NYC kids, from students who were just in their seat.</h1>
       <p class="lead">Tutors on Track pairs students in grades 3–8 with Brooklyn Tech high schoolers for one-on-one help. No fees, no catch — just a kid who remembers how hard the class was.</p>
       <div class="actions">
@@ -212,18 +217,13 @@
       </div>
       <p class="fine"><strong>Online only, over Google Meet — never in person.</strong> A parent is part of every sign-up.</p>
     </div>
-    <div>
-      <div class="tv">
-        <span class="tag">Why we started this</span>
-        <!-- PLACEHOLDER VIDEO: replace assets/intro.mp4 and assets/intro-poster.jpg with the real files.
-             If the video goes on YouTube instead, swap the <video> for:
-             <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Why we started Tutors on Track" allowfullscreen></iframe> -->
-        <video controls preload="metadata" poster="assets/intro-poster.jpg">
-          <source src="assets/intro.mp4" type="video/mp4">
-          Your browser can't play this video.
-        </video>
-        <p class="caption">A 60-second hello from the team. (Video coming soon.)</p>
-      </div>
+    <div class="tv">
+      <span class="tag">Why we started this</span>
+      <video controls preload="metadata" playsinline poster="assets/intro-poster.jpg">
+        <source src="assets/intro.mp4" type="video/mp4">
+        Your browser can't play this video.
+      </video>
+      <p class="caption">A one-minute hello from Kaitlyn, our founder.</p>
     </div>
   </div>
 </section>
@@ -287,36 +287,31 @@
   <div class="wrap">
     <h2>Meet the tutors</h2>
     <p>All of us are current Brooklyn Tech students. First names only, on purpose.</p>
-    <!-- PLACEHOLDER TUTORS: replace names, grades, subjects. Add or remove cards freely. -->
+    <!-- Tutor cards: photo or letter avatar, name, position. -->
     <div class="tutors">
       <article class="tutor">
         <div class="ava" style="background:var(--sun)">K</div>
         <h3>Kaitlyn</h3>
-        <div class="meta">Senior</div>
         <p>Founder &amp; Director</p>
       </article>
       <article class="tutor">
-        <div class="ava" style="background:var(--mint)">A</div>
-        <h3>[Name]</h3>
-        <div class="meta">Senior</div>
+        <div class="ava photo"><img src="assets/amy.png" alt="Amy"></div>
+        <h3>Amy</h3>
         <p>Co-founder &amp; Program Director</p>
       </article>
       <article class="tutor">
-        <div class="ava" style="background:var(--blue-pale)">B</div>
-        <h3>[Name]</h3>
-        <div class="meta">Junior</div>
+        <div class="ava photo"><img src="assets/mark.png" alt="Mark"></div>
+        <h3>Mark</h3>
         <p>Co-founder &amp; Head of Tutoring</p>
       </article>
       <article class="tutor">
-        <div class="ava" style="background:var(--sun-pale)">C</div>
-        <h3>[Name]</h3>
-        <div class="meta">Senior</div>
+        <div class="ava chef" style="background:var(--sun-pale)"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="38" r="17" fill="#FFF1C9"/><path d="M18 30c-6-1-8-8-3-11 0-7 8-9 11-5 3-5 12-5 14 0 5-4 13 0 11 6 5 2 3 10-3 10z" fill="#fff" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round"/><rect x="18" y="28" width="28" height="5" rx="2" fill="#fff" stroke="#1F2A44" stroke-width="2.5"/><circle cx="26" cy="41" r="2" fill="#1F2A44"/><circle cx="38" cy="41" r="2" fill="#1F2A44"/><path d="M24 48q8 4 16 0" stroke="#1F2A44" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M27 46h10" stroke="#1F2A44" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <h3>Gordon</h3>
         <p>Co-founder &amp; Curriculum Lead</p>
       </article>
       <article class="tutor">
-        <div class="ava" style="background:var(--mint-pale)">D</div>
+        <div class="ava" style="background:var(--mint-pale)">?</div>
         <h3>[Name]</h3>
-        <div class="meta">Junior</div>
         <p>Co-founder &amp; Family Outreach Coordinator</p>
       </article>
       <article class="tutor join">
