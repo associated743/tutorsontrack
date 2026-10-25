@@ -88,7 +88,7 @@
   /* note card (why we started) */
   .note{
     background:var(--sun-pale);border:3px solid var(--ink);border-radius:var(--r-big);
-    padding:32px 36px;max-width:760px;position:relative;box-shadow:6px 6px 0 var(--ink);
+    padding:32px 36px;max-width:760px;margin:0 auto;position:relative;box-shadow:6px 6px 0 var(--ink);
   }
   .note::before{
     content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);
@@ -171,7 +171,8 @@
   form .small{font-size:.85rem;color:var(--ink-soft);margin:12px 0 0}
 
   /* faq */
-  details{border:3px solid var(--ink);border-radius:18px;background:#fff;margin-bottom:12px;max-width:760px}
+  details{border:3px solid var(--ink);border-radius:18px;background:#fff;margin:0 auto 12px;max-width:760px}
+  #faq h2{text-align:center}
   summary{cursor:pointer;padding:16px 20px;font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.1rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";font-size:1.5rem;color:var(--blue)}
@@ -223,7 +224,6 @@
         <source src="assets/intro.mp4" type="video/mp4">
         Your browser can't play this video.
       </video>
-      <p class="caption">A one-minute hello from Kaitlyn, our founder.</p>
     </div>
   </div>
 </section>
@@ -308,11 +308,6 @@
         <div class="ava chef" style="background:var(--sun-pale)"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="38" r="17" fill="#FFF1C9"/><path d="M18 30c-6-1-8-8-3-11 0-7 8-9 11-5 3-5 12-5 14 0 5-4 13 0 11 6 5 2 3 10-3 10z" fill="#fff" stroke="#1F2A44" stroke-width="2.5" stroke-linejoin="round"/><rect x="18" y="28" width="28" height="5" rx="2" fill="#fff" stroke="#1F2A44" stroke-width="2.5"/><circle cx="26" cy="41" r="2" fill="#1F2A44"/><circle cx="38" cy="41" r="2" fill="#1F2A44"/><path d="M24 48q8 4 16 0" stroke="#1F2A44" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M27 46h10" stroke="#1F2A44" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <h3>Gordon</h3>
         <p>Co-founder &amp; Curriculum Lead</p>
-      </article>
-      <article class="tutor">
-        <div class="ava" style="background:var(--mint-pale)">?</div>
-        <h3>[Name]</h3>
-        <p>Co-founder &amp; Family Outreach Coordinator</p>
       </article>
       <article class="tutor join">
         <h3>Want to tutor?</h3>
