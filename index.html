@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutors on Track — free tutoring for NYC students</title>
+<meta name="description" content="Free one-on-one tutoring for NYC kids, run by Brooklyn Tech students. Math, reading, state tests and SHSAT prep. Sign up in two minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFDF7;
+    --ink:#1F2A44;
+    --ink-soft:#4A5572;
+    --blue:#4F6BED;
+    --blue-pale:#E6EBFF;
+    --sun:#FFC94D;
+    --sun-pale:#FFF1C9;
+    --mint:#BFE8D8;
+    --mint-pale:#EAF8F2;
+    --line:#D8DCE8;
+    --r-big:24px;
+    --r-pill:999px;
+    --max:1040px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.6;
+  }
+  h1,h2,h3{font-family:"Fredoka",system-ui,sans-serif;line-height:1.1;margin:0 0 .4em}
+  h1{font-size:clamp(2.4rem,5.2vw,3.8rem);font-weight:700;letter-spacing:-.01em}
+  h2{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:600}
+  h3{font-size:1.25rem;font-weight:600}
+  p{margin:0 0 1em;max-width:62ch}
+  a{color:var(--blue)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+  @media (max-width:640px){section{padding:52px 0}}
+
+  /* buttons */
+  .btn{
+    display:inline-block;font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.05rem;
+    padding:14px 26px;border-radius:var(--r-pill);text-decoration:none;cursor:pointer;
+    border:3px solid var(--ink);background:var(--sun);color:var(--ink);
+    box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;
+  }
+  .btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+  .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .btn.ghost{background:#fff}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:rgba(255,253,247,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.35rem}
+  .logo svg{width:34px;height:34px}
+  .nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+  .nav ul a{text-decoration:none;color:var(--ink-soft);font-weight:700}
+  .nav ul a:hover{color:var(--ink)}
+  .nav .btn{padding:9px 18px;font-size:.95rem;box-shadow:3px 3px 0 var(--ink)}
+  @media (max-width:760px){.nav ul{display:none}}
+
+  /* hero */
+  .hero{padding:64px 0 48px;position:relative;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+  .hero .lead{font-size:1.2rem;color:var(--ink-soft);max-width:46ch}
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+  .hero .fine{font-size:.95rem;color:var(--ink-soft);margin-top:18px}
+
+  /* video "TV" */
+  .tv{
+    position:relative;background:#fff;border:3px solid var(--ink);border-radius:var(--r-big);
+    padding:12px;box-shadow:8px 8px 0 var(--blue);
+  }
+  .tv video,.tv iframe{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;background:var(--ink);border:0}
+  .tv .tag{
+    position:absolute;top:-16px;left:22px;background:var(--sun);border:3px solid var(--ink);
+    border-radius:var(--r-pill);padding:4px 14px;font-family:"Fredoka",sans-serif;font-weight:600;font-size:.95rem;
+  }
+  .tv .caption{font-size:.92rem;color:var(--ink-soft);margin:10px 4px 0}
+
+  /* note card (why we started) */
+  .note{
+    background:var(--sun-pale);border:3px solid var(--ink);border-radius:var(--r-big);
+    padding:32px 36px;max-width:760px;position:relative;box-shadow:6px 6px 0 var(--ink);
+  }
+  .note::before{
+    content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    width:110px;height:28px;background:var(--mint);opacity:.9;border-radius:4px;
+  }
+  .note p{font-size:1.1rem}
+  .note .sig{font-family:"Fredoka",sans-serif;font-weight:600;margin-top:8px}
+
+  /* how it works — the track */
+  .track{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+  .track::before{
+    content:"";position:absolute;left:8%;right:8%;top:38px;height:0;
+    border-top:4px dashed var(--blue);z-index:0;
+  }
+  .track li{position:relative;z-index:1;text-align:center;padding:0 8px}
+  .track .stop{
+    width:76px;height:76px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;
+    background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  }
+  .track .stop svg{width:36px;height:36px}
+  .track li:nth-child(1) .stop{background:var(--sun)}
+  .track li:nth-child(2) .stop{background:var(--mint)}
+  .track li:nth-child(3) .stop{background:var(--blue-pale)}
+  .track p{margin:0 auto;max-width:28ch;color:var(--ink-soft)}
+  @media (max-width:760px){
+    .track{grid-template-columns:1fr;gap:34px}
+    .track::before{left:50%;right:auto;top:0;bottom:0;height:auto;width:0;border-top:0;border-left:4px dashed var(--blue);transform:translateX(-2px)}
+    .track li{background:var(--paper);padding:6px 0}
+  }
+
+  /* subjects */
+  .subjects{background:var(--mint-pale);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .chip{
+    background:#fff;border:3px solid var(--ink);border-radius:var(--r-pill);padding:8px 18px;
+    font-family:"Fredoka",sans-serif;font-weight:600;font-size:1rem;
+  }
+  .chip.soon{border-style:dashed;color:var(--ink-soft);background:transparent}
+  .subjects .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  @media (max-width:760px){.subjects .grid{grid-template-columns:1fr}}
+
+  /* tutors */
+  .tutors{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;margin-top:30px}
+  .tutor{
+    background:#fff;border:3px solid var(--ink);border-radius:var(--r-big);padding:22px;
+    box-shadow:5px 5px 0 var(--line);
+  }
+  .tutor .ava{
+    width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px;
+    font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.4rem;border:3px solid var(--ink);
+  }
+  .tutor h3{margin-bottom:2px}
+  .tutor .meta{color:var(--ink-soft);font-size:.95rem;margin-bottom:10px}
+  .tutor p{font-size:1rem;margin:0;font-family:"Fredoka",sans-serif;font-weight:600;color:var(--blue)}
+  .tutor.join{background:var(--blue-pale);border-style:dashed;display:flex;flex-direction:column;justify-content:center;text-align:center}
+  .tutor.join .btn{align-self:center;margin-top:12px}
+
+  /* signup */
+  .signup{background:var(--blue);color:#fff;border-top:3px solid var(--ink)}
+  .signup .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+  @media (max-width:860px){.signup .wrap{grid-template-columns:1fr}}
+  .signup p{color:#E6EBFF}
+  .signup ul{padding-left:20px;color:#E6EBFF}
+  form{
+    background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:var(--r-big);
+    padding:28px;box-shadow:8px 8px 0 var(--ink);
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:560px){.row{grid-template-columns:1fr}}
+  label{display:block;font-weight:700;font-size:.95rem;margin:12px 0 6px}
+  input,select,textarea{
+    width:100%;font:inherit;padding:11px 13px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)
+  }
+  input:focus,select:focus,textarea:focus{border-color:var(--blue);outline:none}
+  textarea{min-height:90px;resize:vertical}
+  form .btn{width:100%;margin-top:20px;text-align:center}
+  form .small{font-size:.85rem;color:var(--ink-soft);margin:12px 0 0}
+
+  /* faq */
+  details{border:3px solid var(--ink);border-radius:18px;background:#fff;margin-bottom:12px;max-width:760px}
+  summary{cursor:pointer;padding:16px 20px;font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.1rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.5rem;color:var(--blue)}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 20px 16px;margin:0;color:var(--ink-soft)}
+
+  /* footer */
+  footer{border-top:3px solid var(--ink);padding:36px 0;font-size:.95rem;color:var(--ink-soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--ink)}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Tutors on Track home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#FFC94D" stroke="#1F2A44" stroke-width="3"/><path d="M9 26 L31 14" stroke="#1F2A44" stroke-width="3" stroke-linecap="round"/><path d="M13 29 L27 21 M11 21 L25 13" stroke="#4F6BED" stroke-width="2.5" stroke-linecap="round"/></svg>
+      Tutors on Track
+    </a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#subjects">Subjects</a></li>
+      <li><a href="#tutors">Tutors</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn" href="#signup">Sign up</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Free tutoring for NYC kids, from students who were just in their seat.</h1>
+      <p class="lead">Tutors on Track pairs students in grades 3–8 with Brooklyn Tech high schoolers for one-on-one help. No fees, no catch — just a kid who remembers how hard the class was.</p>
+      <div class="actions">
+        <a class="btn" href="#signup">Sign up a student</a>
+        <a class="btn ghost" href="#how">See how it works</a>
+      </div>
+      <p class="fine"><strong>Online only, over Google Meet — never in person.</strong> A parent is part of every sign-up.</p>
+    </div>
+    <div>
+      <div class="tv">
+        <span class="tag">Why we started this</span>
+        <!-- PLACEHOLDER VIDEO: replace assets/intro.mp4 and assets/intro-poster.jpg with the real files.
+             If the video goes on YouTube instead, swap the <video> for:
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Why we started Tutors on Track" allowfullscreen></iframe> -->
+        <video controls preload="metadata" poster="assets/intro-poster.jpg">
+          <source src="assets/intro.mp4" type="video/mp4">
+          Your browser can't play this video.
+        </video>
+        <p class="caption">A 60-second hello from the team. (Video coming soon.)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="note">
+      <h2>A note from our founder</h2>
+      <!-- PLACEHOLDER COPY: daughter writes this in her own words. -->
+      <p>Hi, I'm Kaitlyn, a senior at Brooklyn Tech. When I was studying for the SHSAT, a lot of my friends' families paid for tutors, and I know plenty of kids whose families can't. We started Tutors on Track because the stuff that helped us — someone patient, a little older, who explains things the way a classmate would — shouldn't cost anything.</p>
+      <p>We're not a company. We're a group of friends who like teaching and have the time. If that sounds like something your kid could use, sign up and we'll get back to you within a few days.</p>
+      <div class="sig">— Kaitlyn, founder</div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p>Three stops. Most families are matched within a week.</p>
+    <ol class="track">
+      <li>
+        <div class="stop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A44" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <h3>Sign up</h3>
+        <p>A parent fills out the short form below: grade, subject, and when you're free.</p>
+      </li>
+      <li>
+        <div class="stop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A44" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 15c2.5 0 4.5 1.8 4.5 4"/></svg></div>
+        <h3>Get matched</h3>
+        <p>We pair your student with a tutor who's strong in that subject and emails you both to set a time.</p>
+      </li>
+      <li>
+        <div class="stop" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1F2A44" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M10 11l2-2 2 2"/></svg></div>
+        <h3>Meet online weekly</h3>
+        <p>Sessions are 30 minutes on Google Meet — online only — usually once or twice a week, for as long as it's helping.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="subjects" class="subjects">
+  <div class="wrap grid">
+    <div>
+      <h2>What we help with</h2>
+      <p>We teach what we're good at — mostly the classes and tests we took ourselves in the last couple of years. Don't see your subject? Ask anyway.</p>
+    </div>
+    <div>
+      <div class="chips">
+        <span class="chip">Math</span>
+        <span class="chip">Reading &amp; writing</span>
+        <span class="chip">NY State ELA test</span>
+        <span class="chip">NY State Math test</span>
+        <span class="chip">SHSAT prep</span>
+        <span class="chip">Homework help</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tutors">
+  <div class="wrap">
+    <h2>Meet the tutors</h2>
+    <p>All of us are current Brooklyn Tech students. First names only, on purpose.</p>
+    <!-- PLACEHOLDER TUTORS: replace names, grades, subjects. Add or remove cards freely. -->
+    <div class="tutors">
+      <article class="tutor">
+        <div class="ava" style="background:var(--sun)">K</div>
+        <h3>Kaitlyn</h3>
+        <div class="meta">Senior</div>
+        <p>Founder &amp; Director</p>
+      </article>
+      <article class="tutor">
+        <div class="ava" style="background:var(--mint)">A</div>
+        <h3>[Name]</h3>
+        <div class="meta">Senior</div>
+        <p>Co-founder &amp; Program Director</p>
+      </article>
+      <article class="tutor">
+        <div class="ava" style="background:var(--blue-pale)">B</div>
+        <h3>[Name]</h3>
+        <div class="meta">Junior</div>
+        <p>Co-founder &amp; Head of Tutoring</p>
+      </article>
+      <article class="tutor">
+        <div class="ava" style="background:var(--sun-pale)">C</div>
+        <h3>[Name]</h3>
+        <div class="meta">Senior</div>
+        <p>Co-founder &amp; Curriculum Lead</p>
+      </article>
+      <article class="tutor">
+        <div class="ava" style="background:var(--mint-pale)">D</div>
+        <h3>[Name]</h3>
+        <div class="meta">Junior</div>
+        <p>Co-founder &amp; Family Outreach Coordinator</p>
+      </article>
+      <article class="tutor join">
+        <h3>Want to tutor?</h3>
+        <p>If you're a high schooler with a subject you love, we'd like to meet you.</p>
+        <a class="btn ghost" href="#signup">Apply as a tutor</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="signup" class="signup">
+  <div class="wrap">
+    <div>
+      <h2>Sign up</h2>
+      <p>Takes about two minutes. We'll reply by email within a few days.</p>
+      <ul>
+        <li>A parent or guardian fills this out — we won't match a student without one.</li>
+        <li>We take a limited number of new students each month so nobody gets left waiting.</li>
+        <li>Everything is free. We'll never ask for payment.</li>
+      </ul>
+    </div>
+    <!-- PLACEHOLDER FORM ACTION: replace YOUR_FORM_ID with the Formspree form ID. Submissions go to the email on that Formspree account. -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="role">I am a</label>
+      <select id="role" name="role" required>
+        <option value="parent">Parent or guardian signing up a student</option>
+        <option value="tutor">High schooler applying to tutor</option>
+      </select>
+      <div class="row">
+        <div><label for="pname">Your name</label><input id="pname" name="parent_name" required></div>
+        <div><label for="pemail">Your email</label><input id="pemail" name="email" type="email" required></div>
+      </div>
+      <div class="row">
+        <div><label for="sname">Student's first name</label><input id="sname" name="student_name"></div>
+        <div><label for="grade">Student's grade</label>
+          <select id="grade" name="grade">
+            <option value="">Choose…</option>
+            <option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
+          </select>
+        </div>
+      </div>
+      <label for="subject">Subject or test</label>
+      <input id="subject" name="subject" placeholder="e.g. Algebra I, SHSAT">
+      <label for="avail">When are you usually free?</label>
+      <input id="avail" name="availability" placeholder="e.g. weekday evenings, Saturday mornings">
+      <label for="notes">Anything else we should know?</label>
+      <textarea id="notes" name="notes" placeholder="What's hard right now, what's coming up, anything that would help us match well."></textarea>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit">Send sign-up</button>
+      <p class="small">We only use this to match and contact you. We don't share it.</p>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions parents ask</h2>
+    <details open>
+      <summary>Is it really free?</summary>
+      <p>Yes. No fees, no trial period, no upsell. The tutors volunteer their time.</p>
+    </details>
+    <details>
+      <summary>Who are the tutors?</summary>
+      <p>Current Brooklyn Tech students who did well in the subject they teach.</p>
+    </details>
+    <details>
+      <summary>Is it online or in person?</summary>
+      <p><strong>Online only.</strong> Every session is on Google Meet from the tutor's and student's own homes — we never meet in person. A parent is welcome to sit in on any session.</p>
+    </details>
+    <details>
+      <summary>How are students and tutors kept safe?</summary>
+      <p>A parent signs up every student and is copied on scheduling emails. Sessions happen on Google Meet only — no private messaging apps, no texting. Tutors go by first name only; we never share a tutor's last name, address, or personal contact details, and we never ask for a student's. <strong>Tutors and students never meet in person</strong> through this program.</p>
+    </details>
+    <details>
+      <summary>Can my kid get help with a subject not listed?</summary>
+      <p>Ask in the form. If one of us can help, we will; if not, we'll tell you quickly.</p>
+    </details>
+    <details>
+      <summary>Can I volunteer as a tutor?</summary>
+      <p>If you're in high school and strong in a subject, choose "applying to tutor" on the form.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr"></span> Tutors on Track · A student-run project, not a business.</div>
+    <div><a href="mailto:hello@tutorsontrack.org">hello@tutorsontrack.org</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
