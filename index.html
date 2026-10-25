@@ -169,6 +169,9 @@
   textarea{min-height:90px;resize:vertical}
   form .btn{width:100%;margin-top:20px;text-align:center}
   form .small{font-size:.85rem;color:var(--ink-soft);margin:12px 0 0}
+  .done{background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:var(--r-big);padding:40px 28px;box-shadow:8px 8px 0 var(--ink);text-align:center}
+  .done h3{font-size:2rem;margin-bottom:.3em}
+  .done p{margin:0 auto}
 
   /* faq */
   details{border:3px solid var(--ink);border-radius:18px;background:#fff;margin:0 auto 12px;max-width:760px}
@@ -329,36 +332,40 @@
         <li>Everything is free. We'll never ask for payment.</li>
       </ul>
     </div>
-    <!-- PLACEHOLDER FORM ACTION: replace YOUR_FORM_ID with the Formspree form ID. Submissions go to the email on that Formspree account. -->
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <!-- Submits to a Google Form in the background (responses -> tutorsontrackorg@gmail.com's Google Sheet). -->
+    <form id="signupForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfudPZvZXPzgOkJQHrcWW3UDJz5JjqV9UUchdxUnv9IyPNToA/formResponse" method="POST" target="gform_sink">
       <label for="role">I am a</label>
-      <select id="role" name="role" required>
-        <option value="parent">Parent or guardian signing up a student</option>
-        <option value="tutor">High schooler applying to tutor</option>
+      <select id="role" name="entry.269986801" required>
+        <option value="Parent or guardian">Parent or guardian signing up a student</option>
+        <option value="Tutor applicant">High schooler applying to tutor</option>
       </select>
       <div class="row">
-        <div><label for="pname">Your name</label><input id="pname" name="parent_name" required></div>
-        <div><label for="pemail">Your email</label><input id="pemail" name="email" type="email" required></div>
+        <div><label for="pname">Your name</label><input id="pname" name="entry.1893527189" required></div>
+        <div><label for="pemail">Your email</label><input id="pemail" name="entry.1420457235" type="email" required></div>
       </div>
       <div class="row">
-        <div><label for="sname">Student's first name</label><input id="sname" name="student_name"></div>
+        <div><label for="sname">Student's first name</label><input id="sname" name="entry.21023158"></div>
         <div><label for="grade">Student's grade</label>
-          <select id="grade" name="grade">
+          <select id="grade" name="entry.1233329364">
             <option value="">Choose…</option>
             <option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
           </select>
         </div>
       </div>
       <label for="subject">Subject or test</label>
-      <input id="subject" name="subject" placeholder="e.g. Algebra I, SHSAT">
+      <input id="subject" name="entry.1755427209" placeholder="e.g. Algebra I, SHSAT">
       <label for="avail">When are you usually free?</label>
-      <input id="avail" name="availability" placeholder="e.g. weekday evenings, Saturday mornings">
+      <input id="avail" name="entry.1603187620" placeholder="e.g. weekday evenings, Saturday mornings">
       <label for="notes">Anything else we should know?</label>
-      <textarea id="notes" name="notes" placeholder="What's hard right now, what's coming up, anything that would help us match well."></textarea>
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+      <textarea id="notes" name="entry.611576377" placeholder="What's hard right now, what's coming up, anything that would help us match well."></textarea>
       <button class="btn" type="submit">Send sign-up</button>
       <p class="small">We only use this to match and contact you. We don't share it.</p>
     </form>
+    <div id="signupDone" class="done" hidden>
+      <h3>Sent!</h3>
+      <p>Thanks — we got your sign-up and will email you within a few days.</p>
+    </div>
+    <iframe name="gform_sink" id="gform_sink" style="display:none" title="hidden"></iframe>
   </div>
 </section>
 
@@ -397,10 +404,17 @@
 <footer>
   <div class="wrap">
     <div>© <span id="yr"></span> Tutors on Track · A student-run project, not a business.</div>
-    <div><a href="mailto:hello@tutorsontrack.org">hello@tutorsontrack.org</a></div>
+    <div><a href="mailto:tutorsontrackorg@gmail.com">tutorsontrackorg@gmail.com</a></div>
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var f=document.getElementById('signupForm'),d=document.getElementById('signupDone'),sink=document.getElementById('gform_sink'),sent=false;
+  f.addEventListener('submit',function(){sent=true;f.querySelector('button').textContent='Sending…';});
+  sink.addEventListener('load',function(){if(!sent)return;f.hidden=true;d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'center'});});
+})();
+</script>
 </body>
 </html>
